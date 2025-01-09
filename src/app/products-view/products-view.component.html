@@ -8,13 +8,13 @@
               Customize Pies
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-side-menu [customize]="true"></app-side-menu>
+          <app-side-menu [customize]="true" />
         </mat-expansion-panel>
       </mat-accordion>
-      <app-side-menu></app-side-menu>
+      <app-side-menu />
     </div>
     <div class="detail-wrapper">
-      <app-detail-view/>
+      <router-outlet />
     </div>
   </div>
 </section>

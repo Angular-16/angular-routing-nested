@@ -20,13 +20,12 @@ import { ContactService } from 'src/app/services/contact.service';
   ],
   selector: 'app-customize-view',
   templateUrl: './customize-view.component.html',
-  styleUrls: ['./customize-view.component.css']
+  styleUrls: ['./customize-view.component.css'],
 })
 export class CustomizeViewComponent {
-  selectedPie$ = this.pieService.selectedPie$;
-  constructor(private readonly pieService: PieService,){}
-  readonly contactService = inject(ContactService);
-  destroyed$ = new ReplaySubject<void>(1);
+  public readonly selectedPie$ = inject(PieService).selectedPie$;
+  public readonly contactService = inject(ContactService);
+  public destroyed$ = new ReplaySubject<void>(1);
 
   model: ContactForm = {
     phone: '',
@@ -39,11 +38,12 @@ export class CustomizeViewComponent {
     this.submitted = true;
     this.loading = true;
 
-    this.contactService.submitContactForm(model).pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(() => {
-      this.loading = false;
-    })
+    this.contactService
+      .submitContactForm(model)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.loading = false;
+      });
   }
 
   clearForm() {
@@ -51,7 +51,7 @@ export class CustomizeViewComponent {
     this.model = {
       phone: '',
       comment: '',
-    }
+    };
   }
 
   ngOnDestroy(): void {
