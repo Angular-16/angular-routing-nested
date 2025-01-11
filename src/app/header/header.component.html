@@ -1,7 +1,9 @@
 <header>
   <div class="site-header-wrapper">
     <h1>
-      <button [routerLink]="['/']" mat-menu-item><img src="../../assets/images/logo.png" alt="Bethany's Pie Shop Logo" /></button>
+      <button [routerLink]="['/']" mat-menu-item>
+        <img src="../../assets/images/logo.png" alt="Bethany's Pie Shop Logo" />
+      </button>
     </h1>
     <nav>
       <ul>
@@ -12,33 +14,45 @@
             [matMenuTriggerFor]="menu"
             routerLinkActive="active-link"
             ariaCurrentWhenActive="page"
-          >Shop
+          >
+            Shop
             <span>&#8964;</span>
             <mat-menu class="menu-dropdown" #menu="matMenu">
               <button
                 mat-menu-item
-                [routerLink]="['./' + ROUTER_TOKENS.SHOP, Category.SEASONAL_PIE]"
+                [routerLink]="[
+                  './' + ROUTER_TOKENS.SHOP,
+                  Category.SEASONAL_PIE,
+                ]"
                 routerLinkActive="active-link-li"
                 ariaCurrentWhenActive="page"
-              >Seasonal Pies</button>
+              >
+                Seasonal Pies
+              </button>
               <button
                 mat-menu-item
                 [routerLink]="['./' + ROUTER_TOKENS.SHOP, Category.FRUIT_PIE]"
                 routerLinkActive="active-link-li"
                 ariaCurrentWhenActive="page"
-              >Fruit Pies</button>
+              >
+                Fruit Pies
+              </button>
               <button
                 mat-menu-item
                 [routerLink]="['./' + ROUTER_TOKENS.SHOP, Category.CHEESECAKE]"
                 routerLinkActive="active-link-li"
                 ariaCurrentWhenActive="page"
-              >Cheesecakes</button>
+              >
+                Cheesecakes
+              </button>
               <button
                 mat-menu-item
                 [routerLink]="['./' + ROUTER_TOKENS.SHOP, Category.ALL]"
                 routerLinkActive="active-link-li"
                 ariaCurrentWhenActive="page"
-              >All Pies</button>
+              >
+                All Pies
+              </button>
             </mat-menu>
           </button>
         </li>
@@ -49,7 +63,9 @@
             [routerLink]="['./' + ROUTER_TOKENS.CONTACT]"
             routerLinkActive="active-link"
             ariaCurrentWhenActive="page"
-          >Contact</button>
+          >
+            Contact
+          </button>
         </li>
         <li>
           <button
@@ -58,7 +74,9 @@
             [routerLink]="['./' + ROUTER_TOKENS.ABOUT]"
             routerLinkActive="active-link"
             ariaCurrentWhenActive="page"
-          >About</button>
+          >
+            About
+          </button>
         </li>
       </ul>
     </nav>
@@ -67,9 +85,14 @@
         <li>
           <button
             mat-menu-item
+            [routerLink]="['/', { outlets }]"
+            queryParamsHandling="merge"
           >
             <span class="total-items">{{ totalItems() }}</span>
-            <img src="../../assets/images/cart-icon.png" alt="shopping cart icon" />
+            <img
+              src="../../assets/images/cart-icon.png"
+              alt="shopping cart icon"
+            />
           </button>
         </li>
       </ul>

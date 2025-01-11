@@ -7,7 +7,8 @@ import { ReplaySubject, takeUntil } from 'rxjs';
 import { ContactForm } from '../models/contact-form';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ROUTER_TOKENS } from '../app.routes';
 
 @Component({
   selector: 'app-cart',
@@ -21,10 +22,11 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
   readonly cartService = inject(CartService);
+  readonly router = inject(Router);
 
   readonly cartItemsPlusQuantity = this.cartService.cartItemsPlusQuantity;
   readonly subtotal = this.cartService.subtotal;
@@ -41,17 +43,21 @@ export class CartComponent {
   checkout() {
     this.loading = true;
 
-    this.contactService.submitContactForm(this.model).pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(() => {
-      this.submitted = true;
-      this.loading = false;
-      this.cartService.cartItems.set({});
-    })
+    this.contactService
+      .submitContactForm(this.model)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.submitted = true;
+        this.loading = false;
+        this.cartService.cartItems.set({});
+      });
   }
 
-  close() {
+  close(): void {
     this.submitted = false;
+    this.router.navigate([{ outlets: { [ROUTER_TOKENS.CART]: null } }], {
+      queryParamsHandling: 'merge',
+    });
   }
 
   ngOnDestroy(): void {
