@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { PieService } from '../../services/pie.service';
-import { NgFor, NgIf, AsyncPipe } from '@angular/common';
+import { NgIf, AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,6 @@ import { ContactService } from 'src/app/services/contact.service';
 @Component({
   standalone: true,
   imports: [
-    NgFor,
     NgIf,
     AsyncPipe,
     MatButtonModule,
